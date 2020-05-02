@@ -195,13 +195,13 @@ public class Dashboard extends JFrame {
 		});
 		panel_11.setBackground(new Color(233, 150, 122));
 		panel_11.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		panel_11.setBounds(134, 226, 284, 86);
+		panel_11.setBounds(108, 161, 310, 95);
 		panel_emp.add(panel_11);
 		panel_11.setLayout(null);
 		
 		JLabel lblviewEmp = new JLabel("View All");
 		
-		lblviewEmp.setBounds(63, 10, 155, 66);
+		lblviewEmp.setBounds(67, 10, 164, 66);
 		panel_11.add(lblviewEmp);
 		lblviewEmp.setHorizontalAlignment(SwingConstants.CENTER);
 		lblviewEmp.setForeground(Color.WHITE);
@@ -221,7 +221,7 @@ public class Dashboard extends JFrame {
 		});
 		panel_12.setBackground(new Color(238, 130, 238));
 		panel_12.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		panel_12.setBounds(543, 226, 284, 86);
+		panel_12.setBounds(536, 161, 310, 95);
 		panel_emp.add(panel_12);
 		panel_12.setLayout(null);
 		
@@ -229,7 +229,7 @@ public class Dashboard extends JFrame {
 		lblUpdate.setHorizontalAlignment(SwingConstants.CENTER);
 		lblUpdate.setForeground(Color.WHITE);
 		lblUpdate.setFont(new Font("Open Sans", Font.PLAIN, 22));
-		lblUpdate.setBounds(64, 10, 155, 66);
+		lblUpdate.setBounds(64, 10, 174, 66);
 		panel_12.add(lblUpdate);
 		
 		JPanel panel_inv = new JPanel();
@@ -248,7 +248,7 @@ public class Dashboard extends JFrame {
 		});
 		panel_31.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		panel_31.setBackground(new Color(0, 206, 209));
-		panel_31.setBounds(96, 191, 306, 91);
+		panel_31.setBounds(93, 178, 306, 91);
 		panel_inv.add(panel_31);
 		panel_31.setLayout(null);
 		
@@ -256,7 +256,7 @@ public class Dashboard extends JFrame {
 		lblviewInv.setForeground(new Color(255, 255, 255));
 		lblviewInv.setFont(new Font("Open Sans", Font.PLAIN, 22));
 		lblviewInv.setHorizontalAlignment(SwingConstants.CENTER);
-		lblviewInv.setBounds(48, 22, 206, 59);
+		lblviewInv.setBounds(48, 10, 206, 71);
 		panel_31.add(lblviewInv);
 		
 		JPanel panel_32 = new JPanel();
@@ -273,14 +273,14 @@ public class Dashboard extends JFrame {
 		panel_32.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		panel_32.setLayout(null);
 		panel_32.setBackground(new Color(0, 191, 255));
-		panel_32.setBounds(516, 191, 306, 91);
+		panel_32.setBounds(515, 178, 306, 91);
 		panel_inv.add(panel_32);
 		
 		JLabel lblupInv = new JLabel("Update Inventory");
 		lblupInv.setHorizontalAlignment(SwingConstants.CENTER);
 		lblupInv.setForeground(Color.WHITE);
 		lblupInv.setFont(new Font("Open Sans", Font.PLAIN, 22));
-		lblupInv.setBounds(48, 22, 206, 59);
+		lblupInv.setBounds(44, 10, 206, 71);
 		panel_32.add(lblupInv);
 		
 		JPanel panel_01 = new JPanel();
@@ -330,13 +330,38 @@ public class Dashboard extends JFrame {
 		lblInventory_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblInventory_1.setForeground(Color.WHITE);
 		lblInventory_1.setFont(new Font("Open Sans", Font.PLAIN, 22));
+
+		String[] list = {"Marketing", "Product Management", "Maintenance"};
+		@SuppressWarnings("rawtypes")
+		JComboBox combob= new JComboBox(list);
+		combob.setFont(new Font("Open Sans", Font.PLAIN, 14));
+		combob.setBounds(142, 390, 236, 39);
+		panel_addEmp.add(combob);
+		
+		passwordField2 = new JPasswordField();
+		passwordField2.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==KeyEvent.VK_ENTER)
+					addEmployee(combob,panel_addEmp);
+				if(e.getKeyCode()==KeyEvent.VK_UP)
+					passwordField1.requestFocus();
+			}
+
+		});
 		
 		txtfname = new JTextField();
 		txtfname.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode()==KeyEvent.VK_ENTER)
-					txtlname.requestFocus();
+				{
+					if(check(panel_addEmp))
+						addEmployee(combob, panel_addEmp);
+					else
+						txtlname.requestFocus();
+				}
+					
 				if(e.getKeyCode()==KeyEvent.VK_DOWN)
 					txtlname.requestFocus();
 			}
@@ -346,15 +371,34 @@ public class Dashboard extends JFrame {
 		txtfname.setBounds(142, 103, 236, 39);
 		panel_addEmp.add(txtfname);
 		txtfname.setColumns(10);
+
+		String[] list1= {"Kitchen Essentials", "Fashion Store", "Kids Section", "Electronics", "Hardware"};
+		JComboBox combob_1 = new JComboBox(list1);
+		combob_1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				addInventory(combob_1, panel_addInv);
+			}
+		});
+		combob_1.setFont(new Font("Open Sans", Font.PLAIN, 14));
+		combob_1.setBounds(325, 294, 236, 39);
+		panel_addInv.add(combob_1);
 		
 		txtlname = new JTextField();
 		txtlname.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode()==KeyEvent.VK_ENTER)
-					txteid.requestFocus();
+				{
+					if(check(panel_addEmp))
+						addEmployee(combob, panel_addEmp);
+					else
+						txteid.requestFocus();
+				}
+					
 				if(e.getKeyCode()==KeyEvent.VK_DOWN)
 					txteid.requestFocus();
+				
 				if(e.getKeyCode()==KeyEvent.VK_UP)
 					txtfname.requestFocus();
 			}
@@ -369,10 +413,18 @@ public class Dashboard extends JFrame {
 		txteid.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
+				
 				if(e.getKeyCode()==KeyEvent.VK_ENTER)
-					passwordField1.requestFocus();
+				{
+					if(check(panel_addEmp))
+						addEmployee(combob, panel_addEmp);
+					else
+						passwordField1.requestFocus();
+				}
+					
 				if(e.getKeyCode()==KeyEvent.VK_DOWN)
 					passwordField1.requestFocus();
+				
 				if(e.getKeyCode()==KeyEvent.VK_UP)
 					txtlname.requestFocus();
 			}
@@ -410,8 +462,10 @@ public class Dashboard extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode()==KeyEvent.VK_ENTER)
 					passwordField2.requestFocus();
+				
 				if(e.getKeyCode()==KeyEvent.VK_DOWN)
 					passwordField2.requestFocus();
+				
 				if(e.getKeyCode()==KeyEvent.VK_UP)
 					txteid.requestFocus();
 			}
@@ -427,25 +481,6 @@ public class Dashboard extends JFrame {
 		lblPassword.setFont(new Font("Open Sans", Font.PLAIN, 14));
 		lblPassword.setBounds(606, 121, 142, 27);
 		panel_addEmp.add(lblPassword);
-		
-		String[] list = {"Marketing", "Product Management", "Maintenance"};
-		@SuppressWarnings("rawtypes")
-		JComboBox combob= new JComboBox(list);
-		combob.setFont(new Font("Open Sans", Font.PLAIN, 14));
-		combob.setBounds(142, 390, 236, 39);
-		panel_addEmp.add(combob);
-		
-		passwordField2 = new JPasswordField();
-		passwordField2.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode()==KeyEvent.VK_ENTER)
-					addEmployee(combob,panel_addEmp);
-				if(e.getKeyCode()==KeyEvent.VK_UP)
-					passwordField1.requestFocus();
-			}
-
-		});
 		
 		passwordField2.setHorizontalAlignment(SwingConstants.CENTER);
 		passwordField2.setFont(new Font("Open Sans", Font.PLAIN, 14));
@@ -508,6 +543,16 @@ public class Dashboard extends JFrame {
 		panel_addEmp.add(btnClear_1);
 		
 		txtiname = new JTextField();
+		txtiname.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==KeyEvent.VK_ENTER)
+					txticode.requestFocus();
+				if(e.getKeyCode()==KeyEvent.VK_DOWN)
+					txticode.requestFocus();
+				
+			}
+		});
 		txtiname.setHorizontalAlignment(SwingConstants.CENTER);
 		txtiname.setFont(new Font("Open Sans", Font.PLAIN, 14));
 		txtiname.setColumns(10);
@@ -515,6 +560,25 @@ public class Dashboard extends JFrame {
 		panel_addInv.add(txtiname);
 		
 		txticode = new JTextField();
+		txticode.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if(e.getKeyCode()==KeyEvent.VK_ENTER)
+				{
+					if(check(panel_addInv))
+						addInventory(combob_1, panel_addInv);
+					else
+						txtup.requestFocus();
+				}
+				
+				if(e.getKeyCode()==KeyEvent.VK_DOWN)
+					txtup.requestFocus();
+				
+				if(e.getKeyCode()==KeyEvent.VK_UP)
+					txtiname.requestFocus();
+			}
+		});
 		txticode.setHorizontalAlignment(SwingConstants.CENTER);
 		txticode.setFont(new Font("Open Sans", Font.PLAIN, 14));
 		txticode.setColumns(10);
@@ -522,17 +586,30 @@ public class Dashboard extends JFrame {
 		panel_addInv.add(txticode);
 		
 		txtup = new JTextField();
+		txtup.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if(e.getKeyCode()==KeyEvent.VK_ENTER)
+				{
+					if(check(panel_addInv))
+						addInventory(combob_1, panel_addInv);
+					else
+						txtis.requestFocus();
+				}
+				
+				if(e.getKeyCode()==KeyEvent.VK_DOWN)
+					txtis.requestFocus();
+				
+				if(e.getKeyCode()==KeyEvent.VK_UP)
+					txticode.requestFocus();
+			}
+		});
 		txtup.setHorizontalAlignment(SwingConstants.CENTER);
 		txtup.setFont(new Font("Open Sans", Font.PLAIN, 14));
 		txtup.setColumns(10);
 		txtup.setBounds(530, 99, 236, 39);
 		panel_addInv.add(txtup);
-		
-		String[] list1= {"Kitchen Essentials", "Fashion Store", "Kids Section", "Electronics", "Hardware"};
-		JComboBox combob_1 = new JComboBox(list1);
-		combob_1.setFont(new Font("Open Sans", Font.PLAIN, 14));
-		combob_1.setBounds(325, 294, 236, 39);
-		panel_addInv.add(combob_1);
 		
 		JLabel lblItemName = new JLabel("Item Name");
 		lblItemName.setHorizontalTextPosition(SwingConstants.LEFT);
@@ -563,6 +640,18 @@ public class Dashboard extends JFrame {
 		panel_addInv.add(lblInitialStock);
 		
 		txtis = new JTextField();
+		txtis.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if(e.getKeyCode()==KeyEvent.VK_ENTER)
+					addInventory(combob_1, panel_addInv);
+				
+				if(e.getKeyCode()==KeyEvent.VK_UP)
+					txtup.requestFocus();
+				
+			}
+		});
 		txtis.setHorizontalAlignment(SwingConstants.CENTER);
 		txtis.setFont(new Font("Open Sans", Font.PLAIN, 14));
 		txtis.setColumns(10);
@@ -778,6 +867,12 @@ public class Dashboard extends JFrame {
 		mntmLogOut.setIcon(new ImageIcon(img4));
 		mntmLogOut.setFont(new Font("Open Sans", Font.PLAIN, 14));
 		menu.add(mntmLogOut);
+		
+		JLabel lblNewLabel = new JLabel("Store Management System");
+		lblNewLabel.setFont(new Font("Open Sans", Font.BOLD, 35));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(359, 0, 510, 88);
+		panel_bar.add(lblNewLabel);
 		
 		setUndecorated(true);
 	}

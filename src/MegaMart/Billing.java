@@ -171,7 +171,7 @@ public class Billing extends JFrame {
 		LocalDateTime d1 = LocalDateTime.now();
 		
 		epbill.setText("\n"
-				+"\t                     RKB Mega Mart\n"
+				+"\t                           Mega Mart\n"
 				+"\t  Loomba Nibbas, Summerhill, Shimla\n"
 				+"\t                  Phone: 9418450347\n\n"
 				+"\t           Date: "+df.format(d)+"     "+df1.format(d1)

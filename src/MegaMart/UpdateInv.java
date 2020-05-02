@@ -26,6 +26,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class UpdateInv extends JDialog {
 	private JTable table;
@@ -60,18 +62,17 @@ public class UpdateInv extends JDialog {
 		contentPanel.add(combob);
 		
 		table = new JTable(tableModel);
+		table.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==KeyEvent.VK_ENTER)
+					selectLine(combob);
+			}
+		});
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int i = table.getSelectedRow();
-				txtiname.setText(table.getValueAt(i, 0).toString());
-				txticode.setText(table.getValueAt(i, 1).toString());
-				txtstock.setText(table.getValueAt(i, 2).toString());
-				txtprice.setText(table.getValueAt(i, 3).toString());
-				
-				String sec=table.getValueAt(i, 4).toString();
-				
-				combob.setSelectedItem(sec.equals("Kitchen Essentials")? sec: sec.equals("Fashion Store")? sec: sec.equals("Kids Section")? sec: sec.equals("Electronics")? sec: "Hardware");
+				selectLine(combob);
 			}
 		});
 		table.setFont(new Font("Open Sans", Font.PLAIN, 13));
@@ -369,7 +370,6 @@ public class UpdateInv extends JDialog {
 	 * This Function deletes the selected record from the database
 	 * 
 	 * */
-	
 	private void delete()
 	{
 		try
@@ -424,4 +424,20 @@ public class UpdateInv extends JDialog {
 		}
 	}
 	
+	/**
+	 * This Function selects the selected record from the table
+	 * 
+	 * */
+	private void selectLine(JComboBox combob)
+	{
+		int i = table.getSelectedRow();
+		txtiname.setText(table.getValueAt(i, 0).toString());
+		txticode.setText(table.getValueAt(i, 1).toString());
+		txtstock.setText(table.getValueAt(i, 2).toString());
+		txtprice.setText(table.getValueAt(i, 3).toString());
+		
+		String sec=table.getValueAt(i, 4).toString();
+		
+		combob.setSelectedItem(sec.equals("Kitchen Essentials")? sec: sec.equals("Fashion Store")? sec: sec.equals("Kids Section")? sec: sec.equals("Electronics")? sec: "Hardware");
+	}
 }

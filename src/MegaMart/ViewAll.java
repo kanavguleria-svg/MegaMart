@@ -52,8 +52,6 @@ public class ViewAll extends JDialog {
 		try 
 		{
 			con = Connector.DBcon();
-			if(con==null)
-				System.out.println("null");
 			JasperDesign design = JRXmlLoader.load(Loc);
 			JasperReport report = JasperCompileManager.compileReport(design);
 			JasperPrint print = JasperFillManager.fillReport(report, null, con);
