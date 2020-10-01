@@ -57,7 +57,7 @@ public class Billing extends JFrame {
 	
 	/**
 	 * The ArrayLists store the input values 
-	 * to create the final bill
+	 * to create the final bill by summing up the data .
 	 * */
 	ArrayList<String> Itemname = new ArrayList<String>();
 	ArrayList<String> Quantity = new ArrayList<String>();
@@ -67,11 +67,12 @@ public class Billing extends JFrame {
 	
 	
 	/**
-	 * Launch the application.
+	 * Launch the application 
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				/*exception handling*/
 				try {
 					//UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					Billing frame = new Billing();
